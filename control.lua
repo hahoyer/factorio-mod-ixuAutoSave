@@ -87,13 +87,8 @@ local function on_tick(event)
   if event.tick > 0 then
     local timeSpan = TimeSpan.FromTicks(event.tick)
 
-    local dayPart
     local days = tostring(timeSpan.Days)
-    if timeSpan.Days < 1 then
-      dayPart = ""
-    else
-      dayPart = days .. "."
-    end
+    local dayPart = days .. "."
     if timeSpan.Days >= 10 then
       dayPart = "d" .. #days .. "." .. dayPart
     end
