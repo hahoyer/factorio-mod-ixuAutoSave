@@ -81,15 +81,16 @@ local function OpenGui(player)
 end
 
 local function on_tick(event)
-  local name = global.Prefix or ""
+  local name = ""
+  if global.Prefix then name = global.Prefix .. "_" end
 
   if event.tick > 0 then
     local timeSpan = TimeSpan.FromTicks(event.tick)
 
-    local dayPart = "_"
+    local dayPart
     local days = tostring(timeSpan.Days)
     if timeSpan.Days < 1 then
-      dayPart = "_"
+      dayPart = ""
     else
       dayPart = days .. "."
     end

@@ -1,4 +1,9 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.9
+Date: 2021-04-02
+  Bugfixes: 
+    - Underscore between prefix and date-time part was missing when playtime is more than one day
+---------------------------------------------------------------------------------------------------
 Version: 0.1.8
 Date: 2021-04-02
   Changes: 
