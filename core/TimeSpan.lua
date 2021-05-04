@@ -71,4 +71,17 @@ function Result:toString()
   return self.Days .. "." .. self.Hours ..":".. self.Minutes ..":".. self.Seconds
 end
 
+function Result:SmartFormat()
+  if self.Days ~= 0 and self.Hours == 0 and self.Minutes == 0 and self.Seconds == 0 then
+    return self.Days .. "d"
+  elseif self.Days == 0 and self.Hours ~= 0 and self.Minutes == 0 and self.Seconds == 0 then
+    return self.Hours.. "h"
+  elseif self.Days == 0 and self.Hours == 0 and self.Minutes ~= 0 and self.Seconds == 0 then
+    return self.Minutes.. "m"
+  elseif self.Days == 0 and self.Hours == 0 and self.Minutes == 0 and self.Seconds ~= 0 then
+    return self.Seconds.. "s"
+  end
+  return self.Days .. "." .. self.Hours ..":".. self.Minutes ..":".. self.Seconds
+end
+
 return Result

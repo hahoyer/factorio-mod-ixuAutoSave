@@ -30,11 +30,11 @@ local function CheckFrequency()
     end
 
     if frequency:getTicks() < Constants.MinFrequencyTicks then
-        game.print({"message.tooSmallFrequency", frequency:toString()}, {r = 1})
+        game.print({"message.tooSmallFrequency", frequency:SmartFormat()}, {r = 1})
         return
     end
 
-    game.print {"message.actualFrequency", frequency:toString()}
+    game.print {"message.actualFrequency", frequency:SmartFormat()}
 end
 
 local function FinalizeGui()
@@ -75,11 +75,11 @@ local function OpenGui(player)
 end
 
 local function on_tick(event)
-    local name = ""
-    if global.Prefix then name = global.Prefix .. "_" end
+    local name = global.Prefix or ""
 
     if event.tick > 0 then
-        local timeSpan = TimeSpan.FromTicks(event.tick)
+      if global.Prefix then name = name .. "_" end
+      local timeSpan = TimeSpan.FromTicks(event.tick)
 
         local days = tostring(timeSpan.Days)
         local dayPart
@@ -93,6 +93,7 @@ local function on_tick(event)
 
         name = name .. dayPart .. timeSpan:getTimeAsHHMMSS()
     end
+
     if not (game.is_multiplayer()) then
         return game.auto_save(name)
     else
