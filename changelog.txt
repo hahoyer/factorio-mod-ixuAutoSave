@@ -1,8 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.12
+Date: 2021-05-04
+  Bugfixes: 
+    - Last version did it the wron way
+---------------------------------------------------------------------------------------------------
 Version: 0.1.11
 Date: 2021-04-30
   Bugfixes: 
-    - Underscore between prefix and date-time part was missing when playtime is more than one day. Now for 1-9 days it is \_autosave\-\{Prefix\}\_d\{d\}.\{hhmmss\}.zip, for 10 days or more it is \_autosave\-\{Prefix\}\_l\{\#d\}.\{d\}.\{hhmmss\}.zip
+    - Underscore between prefix and date-time part was missing when playtime is more than one day. See description for details
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.10
 Date: 2021-04-29
