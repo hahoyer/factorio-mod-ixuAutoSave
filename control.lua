@@ -88,7 +88,7 @@ local function on_tick(event)
         elseif timeSpan.Days < 10 then
             dayPart = "d" .. days .. "."
         else
-            dayPart = "l" .. #days .. "." .. dayPart
+            dayPart = "l" .. #days .. "." .. days .. "."
         end
 
         name = name .. dayPart .. timeSpan:getTimeAsHHMMSS()
