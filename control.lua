@@ -45,6 +45,7 @@ local function FinalizeGui()
 end
 
 local function on_gui_confirmed(args, frame)
+    settings.global[Constants.GlobalPrefix].value = args.element.text
     global.Prefix = args.element.text
     frame.destroy()
     FinalizeGui()
@@ -131,6 +132,10 @@ local function on_init()
 end
 
 local function on_runtime_mod_setting_changed(args)
+    if args.setting == Constants.GlobalPrefix and args.setting_type == "runtime-global" then
+        global.Prefix = settings.global[Constants.GlobalPrefix].value or ""
+        game.print {"message.actualPrefix", global.Prefix}
+    end
     if args.setting == Constants.Frequency and args.setting_type == "runtime-global" then
         RegisterOnTickHandler()
         CheckFrequency()
