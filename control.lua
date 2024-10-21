@@ -46,13 +46,13 @@ end
 
 local function on_gui_confirmed(args, frame)
     settings.global[Constants.GlobalPrefix].value = args.element.text
-    global.Prefix = args.element.text
+    storage.Prefix = args.element.text
     frame.destroy()
     FinalizeGui()
 end
 
 local function on_gui_closed(frame)
-    global.Prefix = settings.global[Constants.GlobalPrefix].value or ""
+    storage.Prefix = settings.global[Constants.GlobalPrefix].value or ""
     frame.destroy()
     FinalizeGui()
 end
@@ -76,10 +76,10 @@ local function OpenGui(player)
 end
 
 local function on_tick(event)
-    local name = global.Prefix or ""
+    local name = storage.Prefix or ""
 
     if event.tick > 0 then
-      if global.Prefix then name = name .. "_" end
+      if storage.Prefix then name = name .. "_" end
       local timeSpan = TimeSpan.FromTicks(event.tick)
 
         local days = tostring(timeSpan.Days)
@@ -109,15 +109,15 @@ end
 
 local function RegisterOnTickHandler()
     -- Deregister former handler
-    if global.Frequency and IsValidFrequencySetting() then
-        script.on_nth_tick(global.Frequency, nil)
+    if storage.Frequency and IsValidFrequencySetting() then
+        script.on_nth_tick(storage.Frequency, nil)
     end
 
     local frequency = GetFrequency()
     if not frequency then return end
 
     script.on_nth_tick(frequency, on_tick)
-    global.Frequency = frequency
+    storage.Frequency = frequency
 end
 
 local function on_load() RegisterOnTickHandler() end
@@ -127,14 +127,14 @@ local function on_init()
     if settings.global[Constants.EnterPrefixOnInit].value then
         script.on_event(defines.events.on_player_joined_game, on_player_joined_game)
     else
-        global.Prefix = settings.global[Constants.GlobalPrefix].value or ""
+        storage.Prefix = settings.global[Constants.GlobalPrefix].value or ""
     end
 end
 
 local function on_runtime_mod_setting_changed(args)
     if args.setting == Constants.GlobalPrefix and args.setting_type == "runtime-global" then
-        global.Prefix = settings.global[Constants.GlobalPrefix].value or ""
-        game.print {"message.actualPrefix", global.Prefix}
+        storage.Prefix = settings.global[Constants.GlobalPrefix].value or ""
+        game.print {"message.actualPrefix", storage.Prefix}
     end
     if args.setting == Constants.Frequency and args.setting_type == "runtime-global" then
         RegisterOnTickHandler()
